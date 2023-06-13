@@ -49,6 +49,5 @@ jobs:
         if: success() || failure()        # run this step even if previous step failed
         with:
           name: ${{ inputs.context }}
-          path: |
-            ${{ inputs.context }}/target/surefire-reports/*.xml
-            ${{ inputs.context }}/target/failsafe-reports/*.xml
+          path: ${{ inputs.context }}/target/test-results/integrationTest/*.xml
+
