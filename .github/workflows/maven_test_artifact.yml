@@ -43,7 +43,9 @@ jobs:
         #working-directory: ${{ inputs.context }}
         #run: mvn --batch-mode --activate-profiles prod -Dangular.env=qa -Dmaven.test.failure.ignore=true test
         run: |
-          mvn -B verify -Dangular.env=qa -Pprod --file ${{ inputs.context }}/pom.xml
+          mvn -T 1C --batch-mode -Dmaven.test.failure.ignore=true \
+              -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
+              verify -Dangular.env=qa -Pprod --file ${{ inputs.context }}/pom.xml
 
       - uses: actions/upload-artifact@v3  # upload test results
         if: success() || failure()        # run this step even if previous step failed
