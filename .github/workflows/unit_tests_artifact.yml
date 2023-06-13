@@ -27,24 +27,24 @@ jobs:
     uses: ./.github/workflows/maven_test_artifact.yml
     with:
       context: gateway
-# 
-#   tst_assertion_service:
-#     uses: ./.github/workflows/maven_test_artifact.yml
-#     with:
-#       context: assertion-service
-# 
-#   tst_discovery_service:
-#     uses: ./.github/workflows/maven_test_artifact.yml
-#     with:
-#       context: discovery-service
-# 
-#   tst_member_service:
-#     uses: ./.github/workflows/maven_test_artifact.yml
-#     with:
-#       context: member-service
-# 
-#   tst_user_service:
-#     uses: ./.github/workflows/maven_test_artifact.yml
-#     with:
-#       context: user-service
-# 
+
+  tst_assertion_service:
+    uses: ./.github/workflows/maven_test_artifact.yml
+    with:
+      context: assertion-service
+
+  tst_discovery_service:
+    uses: ./.github/workflows/maven_test_artifact.yml
+    with:
+      context: discovery-service
+
+  tst_member_service:
+    uses: ./.github/workflows/maven_test_artifact.yml
+    with:
+      context: member-service
+
+  tst_user_service:
+    uses: ./.github/workflows/maven_test_artifact.yml
+    with:
+      context: user-service
+
