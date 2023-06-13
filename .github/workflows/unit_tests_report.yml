@@ -1,0 +1,46 @@
+name: unit_tests_report
+
+on:
+  workflow_call:
+    inputs:
+      version_tag:
+        description: 'version tag to use'
+        required: false
+        default: "latest"
+        type: string
+
+  workflow_dispatch:
+    inputs:
+      version_tag:
+        description: 'version tag to use'
+        required: false
+        default: "latest"
+        type: string
+
+jobs:
+
+  tst_assertion_service:
+    uses: ./.github/workflows/maven_test_report.yml
+    with:
+      context: assertion-service
+
+  tst_discovery_service:
+    uses: ./.github/workflows/maven_test_report.yml
+    with:
+      context: discovery-service
+
+  tst_gateway:
+    uses: ./.github/workflows/maven_test_report.yml
+    with:
+      context: gateway
+
+  tst_member_service:
+    uses: ./.github/workflows/maven_test_report.yml
+    with:
+      context: member-service
+
+  tst_user_service:
+    uses: ./.github/workflows/maven_test_report.yml
+    with:
+      context: user-service
+

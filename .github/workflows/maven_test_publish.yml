@@ -1,0 +1,55 @@
+name: maven_test_publish
+
+# run maven tests and publish results in one step
+# run from privileged branch
+
+permissions:
+  checks: write
+  contents: read
+  issues: read
+  pull-requests: write
+
+on:
+  workflow_call:
+    inputs:
+      context:
+        description: 'Name of the context in the repo'
+        required: false
+        default: "."
+        type: string
+
+  workflow_dispatch:
+    inputs:
+      context:
+        description: 'Name of the context in the repo'
+        required: false
+        default: "."
+        type: string
+
+jobs:
+  maven_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          cache: maven
+
+      - name: "Test ${{ inputs.context }}"
+        working-directory: ${{ inputs.context }}
+        run: mvn --batch-mode -Dangular.env=qa -Dmaven.test.failure.ignore=true test
+
+      # NOTE: if the above test fail then this step will report that failure and stop the run
+      - name: Publish Unit Test Results
+        uses: dorny/test-reporter@e9fa2f582c0ebbe2e263fd18fad744d52e0b0203
+        if: always()
+        with:
+          name: "${{ inputs.context }}: Unit tests results"
+          path: ${{ inputs.context }}/target/surefire-reports/*.xml
+          reporter: java-junit
+          fail-on-error: true
+
