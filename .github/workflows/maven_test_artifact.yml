@@ -40,12 +40,13 @@ jobs:
           distribution: 'temurin'
 
       - name: "Test ${{ inputs.context }}"
-        #working-directory: ${{ inputs.context }}
-        #run: mvn --batch-mode --activate-profiles prod -Dangular.env=qa -Dmaven.test.failure.ignore=true test
+        working-directory: ${{ inputs.context }}
         run: |
-          mvn -T 1C --batch-mode -Dmaven.test.failure.ignore=true \
+          mvn --quiet -T 1C --batch-mode -Dmaven.test.failure.ignore=true \
               -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
-              verify -Dangular.env=qa -Pprod --file ${{ inputs.context }}/pom.xml
+              verify -Dangular.env=qa --activate-profiles prod
+
+          #--file ${{ inputs.context }}/pom.xml
 
       - uses: actions/upload-artifact@v3  # upload test results
         if: success() || failure()        # run this step even if previous step failed
