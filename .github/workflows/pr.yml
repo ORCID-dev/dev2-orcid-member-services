@@ -22,6 +22,7 @@ jobs:
 
   unit_tests_artifact:
     uses: ./.github/workflows/unit_tests_artifact.yml
+    needs: pre_commit_ci_lite
 #
 #   NOTE: codeql is only available on public repos or enterprise github accounts
 #   codeql:
