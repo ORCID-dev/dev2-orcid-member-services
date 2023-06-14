@@ -84,16 +84,15 @@ repos:
 #         minimum_pre_commit_version: "0"
 #
 
-#   - repo: https://github.com/ORCID/pre-commit-spotless
-#     rev: v1.0.0
-#     hooks:
-#       - id: spotless-check
-#         #types_or: [java, xml]
-#         types_or: [xml]
-#       - id: spotless-apply
-#         #types_or: [java, xml]
-#         types_or: [xml]
-#
+  - repo: https://github.com/ORCID/pre-commit-spotless
+    rev: v1.0.0
+    hooks:
+      - id: spotless-check
+        #types_or: [java, xml]
+        types_or: [xml]
+      - id: spotless-apply
+        #types_or: [java, xml]
+        types_or: [xml]
 
 ##########
 # pre-commit-ci config
